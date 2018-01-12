@@ -116,6 +116,19 @@ def criar_sala(nome_sala,preco_sala,capacidade_sala):
         return True
     else:
         return False
+
+def criar_user(username, password, email, telefone):
+    user = User(username, password, email, telefone)
+    s.add(user)
+    failed=False
+    try:
+        s.commit()
+    except Exception as e:
+        failed=True
+    if not failed:
+        return True
+    else:
+        return False
     
 
 server = SimpleXMLRPCServer((SITE, PORTA_RPCSERVER), allow_none=true)
@@ -127,5 +140,6 @@ server.register_function(pagamento_reserva, "pagamento_reserva")
 server.register_function(get_user_id, "get_user_id")
 server.register_function(get_user_saldo, "get_user_saldo")
 server.register_function(criar_sala, "criar_sala")
+server.register_function(criar_user, "criar_user")
 server.register_function(update_saldo, "update_saldo")
 server.serve_forever()

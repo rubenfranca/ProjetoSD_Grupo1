@@ -139,6 +139,19 @@ def update_saldo():
         return home()
     else:
         return "erro ao adicionar saldo"
+    
+@app.route('/criarUser', methods=['POST'])
+def criar_user():
+    username, password, email, telefone
+    POST_USERNAME = str(request.form['username'])
+    POST_PASSWORD = str(request.form['password'])
+    POST_EMAIL = str(request.form['email'])
+    POST_TELEFONE = int(request.form['telefone'])
+    proxy = xmlrpclib.ServerProxy("http://"+RPCSERVER+str(PORTA_RPCSERVER)+"/")
+    if proxy.criar_user(POST_USERNAME, POST_PASSWORD, POST_EMAIL,POST_TELEFONE):
+        return "utilizador criado"
+    else:
+        return "erro ao criar utilizador"
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
