@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Criar Reserva - Classroom booking app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css" type="text/css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+ {% if not session['logged_in'] %}
+	<p>Por favor faça login</p>
+{% else %}
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Classroom booking app</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <li class="active"><a href="/criarReserva">Criar Reserva</a></li>
+      <li><a href="/reservas">Ver as minhas reservas</a></li>
+      <li><a href="/pagarReserva">Pagar Reservas</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    	<li><a href='/logout'>Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+ <div class="container">
+  <p>{{tabela_salas|safe}}</p>
+  
+</div>
+
+<form action="http://localhost:4003/criarReserva" method="POST">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Reservar sala</h1>
+			</div>
+
+			<div class="login-form">
+				
+				<div class="control-group">
+					<label for='sala_id'>Salas </label>					
+					{{dropdown_salas|safe}}
+				</div>
+				
+				<div class="control-group">
+					<label for='dia'>Data a reservar </label>					
+					<input type="date" name="dia">
+				</div>
+				
+				<div class="control-group">
+					<label for='hora'>Hora</label>					
+					<input type="time" name="hora">
+				</div>
+				
+                <input type="submit" value="Reservar sala" class="btn btn-primary btn-large btn-block" >
+			    <br>
+			</div>
+		</div>
+	</div>
+</form>
+
+
+ 
+{% endif %}
+
+
+
+</body>
+</html>

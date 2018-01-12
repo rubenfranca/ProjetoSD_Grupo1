@@ -1,0 +1,75 @@
+version: "3"
+services:
+  rotas:
+    # replace username/repo:tag with your name and image details
+    image: toomaas/rotas:v5
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    ports:
+      - "4003:4003"
+    volumes:
+      - /home/pi/Desktop/bd/tutorial.db:/app/tutorial.db
+    #networks:
+     # - webnet
+  rpcserver:
+    # replace username/repo:tag with your name and image details
+    image: toomaas/rpcserver:v6
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    ports:
+      - "8000:8000"
+    volumes:
+      - /home/pi/Desktop/bd/tutorial.db:/app/tutorial.db
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    #networks:
+     # - webnet
+  salas:
+    # replace username/repo:tag with your name and image details
+    image: toomaas/salas:v1
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    ports:
+      - "4002:4002"
+    volumes:
+      - /home/pi/Desktop/bd/tutorial.db:/app/tutorial.db
+    #networks:
+      #- webnet
+  reservas:
+    # replace username/repo:tag with your name and image details
+    image: toomaas/reservas:v1
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    ports:
+      - "4001:4001"
+    volumes:
+      - /home/pi/Desktop/bd/tutorial.db:/app/tutorial.db
+    #networks:
+     # - webnet
+networks:
+  webnet:

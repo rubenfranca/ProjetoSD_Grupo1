@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home - Classroom booking app</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css" type="text/css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% if not session['logged_in'] %}
+	<p>Por favor faça login</p>
+{% else %}
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Classroom booking app</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="/criarReserva">Criar Reserva</a></li>
+      <li><a href="/reservas">Ver as minhas reservas</a></li>
+      <li><a href="/pagarReserva">Pagar Reservas</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+		<li><a>{{session['username']}}</a></li>    	
+    	<li><a href='/logout'>Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">  
+  <form action="http://localhost:4003/adicionarSaldo" method="POST">
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				 <h3>O meu Saldo: {{saldo|safe}} euros</h3>
+			</div>
+ 
+			<div class="login-form">
+				<div class="control-group">
+				<input type="number"  class="login-field" value="" placeholder="Adicionar ao Saldo" name="quantidade">
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+ 
+                <input type="submit" value="Carregar dinheiro " class="btn btn-primary btn-large btn-block" >
+			    <br>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+
+{% endif %}
+</body>
+</html>
