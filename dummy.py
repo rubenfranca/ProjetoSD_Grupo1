@@ -1,3 +1,5 @@
+#ficheiro utilizado para meter dados na base de dados
+
 import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
