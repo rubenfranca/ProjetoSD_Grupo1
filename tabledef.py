@@ -1,3 +1,5 @@
+#Ficheiro com os modelos da BD.
+
 from sqlalchemy import *
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy import Column, Date, Integer, String, Float, Time, Boolean
@@ -60,6 +62,7 @@ class Reserva(Base):
         self.sala_id = sala_id
         self.user_id = user_id
     
+    #nao utilizado
     @property
     def serialize(self):
         return{
