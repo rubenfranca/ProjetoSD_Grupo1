@@ -2,10 +2,12 @@
 NOME_BASE_DADOS = 'sqlite:///tutorial.db'
 ENDERECO = 'http://127.0.0.1'
 SITE = '0.0.0.0'
+#Portas dos varios servicos
 PORTA_ROTAS = 4003
 PORTA_RESERVAS = 4001
 PORTA_SALAS = 4002
 PORTA_RPCSERVER = 8000
+#utilizado nos containers
 SALAS = 'salas:'
 RESERVAS = 'reservas:'
 ROTAS = 'rotas:'
