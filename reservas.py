@@ -3,6 +3,7 @@ from configs import *
 #from tabledef import Reserva
 app = Flask(__name__)
 
+#retorna os dados de todas as reservas
 @app.route('/reservas', methods=['GET'])
 def lista_reservas():
     engine = create_engine('sqlite:///tutorial.db', echo=True)
@@ -16,6 +17,7 @@ def lista_reservas():
     #return 1
     return json.dumps(result)#[ row.username for row in b ])
 
+#recebe dados para poder pedir ao servidor rpc para criar uma reserva
 @app.route('/reservas', methods=['POST'])
 def criar_reserva():
     POST_SALA_ID = int(request.form['sala_id'])
@@ -27,6 +29,7 @@ def criar_reserva():
     else:
         return "erro na reserva"
 
+#recebe um id de uma reserva e pede ao rpcserver para tornar o estado dessa reserva como pago
 @app.route('/reservas/update', methods=['POST'])
 def pagamento_reserva():
     POST_RESERVA_ID = str(request.form['id'])
@@ -36,6 +39,7 @@ def pagamento_reserva():
     else:
         return "erro no pagamento da reserva"
 
+#retorna apenas uma reserva de acordo com o id forneceido
 @app.route('/reservas/<int:id>', methods=['GET'])
 def get_reserva(id):
     engine = create_engine(NOME_BASE_DADOS, echo=True)
@@ -44,6 +48,7 @@ def get_reserva(id):
     result = {'reservas': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
     return json.dumps(result)
 
+#retorna todas as reservas com o id de sala fornecido
 @app.route('/reservas/sala/<int:sala_id>', methods=['GET'])
 def get_reserva_sala(sala_id):
     engine = create_engine(NOME_BASE_DADOS, echo=True)
@@ -52,6 +57,7 @@ def get_reserva_sala(sala_id):
     result = {'reservas': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
     return json.dumps(result)
 
+#Retorna todas as reservas pertencentes ao utilizador 
 @app.route('/reservas/user/<int:user_id>', methods=['GET'])
 def get_reserva_user(user_id):
     engine = create_engine(NOME_BASE_DADOS, echo=True)
